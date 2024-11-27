@@ -1,0 +1,10 @@
+[
+    {
+        "name": "toto",
+        "pr\u00e9nom": "toto",
+        "email": "toto@gmail.com",
+        "password": "$2y$10$a24K2H3.WThGyXcXyYOsReGf10CPWudapehy03gmgdpRgEUA7lHby",
+        "message": "toto",
+        "ageCheck": "Yes"
+    }
+]
