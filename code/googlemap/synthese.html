@@ -38,41 +38,43 @@
     }
 
     function loadCourse(courseId) {
-  fetch(`course.php?id=${courseId}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Course not found');
-      }
-      console.log(response); // Ajoute cette ligne pour inspecter la réponse
-      return response.json();
-    })
-    .then(course => {
-      const path = course.markers.map(marker => ({ lat: marker.lat, lng: marker.lng }));
+      fetch(`getCourse.php?id=${courseId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Course not found');
+          }
+          return response.json();
+        })
+        .then(course => {
+          const path = course.markers.map(marker => ({ lat: marker.lat, lng: marker.lng }));
 
-      map.setCenter(path[0]);
+          map.setCenter(path[0]);
 
-      if (polyline) {
-        polyline.setMap(null);
-      }
+          if (polyline) {
+            polyline.setMap(null);
+          }
 
-      polyline = new google.maps.Polyline({
-        path: path,
-        geodesic: true,
-        strokeColor: "#FF0000",
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-      });
+          polyline = new google.maps.Polyline({
+            path: path,
+            geodesic: true,
+            strokeColor: "#FF0000",
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
 
-      polyline.setMap(map);
+          polyline.setMap(map);
 
-      path.forEach(coord => {
-        new google.maps.Marker({
-          position: coord,
-          map: map
+          path.forEach(coord => {
+            new google.maps.Marker({
+              position: coord,
+              map: map
+            });
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
         });
-      });
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-}
+    }
+  </script>
+</body>
+</html>
