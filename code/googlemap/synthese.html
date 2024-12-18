@@ -38,7 +38,7 @@
     }
 
     function loadCourse(courseId) {
-      fetch(`getCourse.php?id=${courseId}`)
+      fetch(`course.php?id=${courseId}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Course not found');
